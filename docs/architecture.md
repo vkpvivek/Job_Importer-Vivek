@@ -43,7 +43,7 @@ Admin dashboard to view import history
     # Container
         Docker + Docker Compose
 
-## 🌐 System Architecture Diagram (Textual)
+## 🌐 System Architecture Diagram
 
 ![System Architecture](./architectrure-design.png)
 
