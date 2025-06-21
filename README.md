@@ -1,6 +1,6 @@
-# 🚀 Artha Job Importer – Scalable Job Feed Integration & Tracking
+# 🚀 Job Importer – Job Feed Integration & Tracking
 
-This is a scalable job importer system that fetches jobs from multiple external XML feeds, parses and processes them using Redis-backed queues, stores them in MongoDB, and provides a clean dashboard to view import history.
+This is a job importer system that fetches jobs from multiple external XML feeds, parses and processes them using Redis-backed queues, stores them in MongoDB, and provides a clean dashboard to view import history.
 
 ---
 
@@ -31,8 +31,7 @@ This is a scalable job importer system that fetches jobs from multiple external 
 
 ## 📂 Project Structure
 
-```txt
-.
+
 ├── client/                 # Next.js frontend
 │   └── app/import-logs/    # Admin UI to view import logs
 │
@@ -50,18 +49,18 @@ This is a scalable job importer system that fetches jobs from multiple external 
 
 
 
-🔧 Setup Instructions
-✅ Prerequisites
-
-    Docker & Docker Compose installed
-
-🚀 Quick Start (Docker)
+##  🔧 Setup Instructions
+    ✅ Prerequisites
+        Docker & Docker Compose installed
 
 
-# From the root directory
-    docker compose up --build
+## 🚀 Quick Start (Docker)
 
-    ✅ This will:
+    # From the root directory
+
+        docker compose up --build
+
+    # ✅ This will:
 
         Build frontend and backend containers
 
@@ -69,13 +68,14 @@ This is a scalable job importer system that fetches jobs from multiple external 
 
         Run everything on:
 
-    Service	URL
+    # Service	URL
         Frontend	http://localhost:3000
         Backend	http://localhost:5000
         API Logs	http://localhost:5000/api/import-logs
 
 
-📦 API Endpoints
+## 📦 API Endpoints
+
         GET /api/import-logs
 
         Returns a list of all import runs with the following:
@@ -90,13 +90,14 @@ This is a scalable job importer system that fetches jobs from multiple external 
             "failedJobs": [{ "jobId": "...", "reason": "..." }]
         }
 
-        🖥️ UI Screens
-            Page	Path	Description
-            Home	/	Welcome screen with button
-            Import History	/import-logs	Table of import logs
+        
+## 🖥️ UI Screens
+    Page	Path	Description
+    Home	/	Welcome screen with button
+    Import History	/import-logs	Table of import logs
 
             
-🧪 Testing the System
+## 🧪 Testing the System
 
     Once up, visit:
         http://localhost:3000 to open the frontend
@@ -106,7 +107,8 @@ This is a scalable job importer system that fetches jobs from multiple external 
     You can also hit:
         http://localhost:5000/api/import-logs
 
-    📥 Feeds Used
+
+## 📥 Feeds Used
         https://jobicy.com/?feed=job_feed
         https://jobicy.com/?feed=job_feed&job_categories=data-science
         https://www.higheredjobs.com/rss/articleFeed.cfm
