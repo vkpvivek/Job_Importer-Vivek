@@ -1,14 +1,14 @@
-📏 Architecture & System Design - Job Importer with Queue Processing & History Tracking.
+## 📏 Architecture & System Design - Job Importer with Queue Processing & History Tracking.
 
 This document describes the architecture, technology choices, and system behavior of the Job Importer, a scalable background job ingestion system.
 
 
-📊 High-Level Overview
+## 📊 High-Level Overview
 
 The system is designed to fetch jobs from multiple external XML feeds, convert and queue them, process them asynchronously, store them in MongoDB, and maintain import logs. A frontend dashboard provides visibility into the import history.
 
 
-Core Capabilities:
+## Core Capabilities:
 
 Scheduled job fetching (via cron)
 
@@ -20,36 +20,94 @@ Admin dashboard to view import history
 
 
 
-🔧 Tech Stack & Tools
+## 🔧 Tech Stack & Tools
 
-Layer
+    # Frontend
+        Next.js (App Router), Tailwind CSS
 
-Technology
+    # Backend
+        Node.js, Express.js
 
-Frontend
+    # DB
+        MongoDB (Mongoose)
 
-Next.js (App Router), Tailwind CSS
+    # Queue
+        BullMQ (based on Redis)
 
-Backend
+    # Queue Store
+        Redis
 
-Node.js, Express.js
+    # Cron Jobs
+        node-cron
 
-DB
+    # Container
+        Docker + Docker Compose
 
-MongoDB (Mongoose)
+## 🌐 System Architecture Diagram (Textual)
++----------------+       +----------------+       +-------------------+
+|  External APIs |  -->  |  Fetch Service |  -->  |  BullMQ Job Queue |
+| (XML Feeds)    |       |  (cron-based)  |       |  (Redis-backed)   |
++----------------+       +----------------+       +---------+---------+
+                                                    |
+                                                    v
+                                          +-------------------+
+                                          | Job Worker (Async)|
+                                          | - Insert/Update   |
+                                          | - Log Failures    |
+                                          +--------+----------+
+                                                   |
+                 +-------------------+              v
+                 | MongoDB (Jobs +   |<----------Import Log Service
+                 | Import Logs)      |
+                 +--------+----------+
+                          |
+                          v
+                +----------------------+
+                | Next.js Admin UI     |
+                | - View Import Logs   |
+                +----------------------+
 
-Queue
 
-BullMQ (based on Redis)
+## 🔄 Data Flow Breakdown
+Cron Schedule: Runs every hour (or every minute in dev).
 
-Queue Store
+Feed Fetch: Fetches multiple XML job feeds and converts them to JSON.
 
-Redis
+Queueing: Each job is sent to BullMQ queue (jobQueue).
 
-Cron Jobs
+Worker Processing: Jobs are processed by a worker:
 
-node-cron
+If job exists: update
 
-Container
+Else: insert new
 
-Docker + Docker Compose
+If error: log failure
+
+Logging: Summary of each run (fetched, new, updated, failed) is saved in import_logs.
+
+Frontend: Fetches logs from /api/import-logs and displays them
+
+
+## 💡 Design Decisions
+BullMQ over alternatives: Offers modern APIs, event-based handling, and better Redis integration.
+
+MongoDB: Schema flexibility is ideal for variable job formats.
+
+node-cron: Simple and effective for interval-based fetch logic.
+
+Next.js App Router: Cleaner routing, better layout handling.
+
+Dockerized: Ensures isolated, reproducible environments.
+
+
+## 🚀 Scalability Considerations
+Queue-based architecture allows job processing to scale horizontally.
+
+Redis and Mongo can be moved to cloud-managed services (Redis Cloud, MongoDB Atlas).
+
+Workers can be deployed independently.
+
+Feed sources can be dynamically extended.
+
+Logs provide visibility into data quality and job performance.
+

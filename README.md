@@ -30,22 +30,22 @@ This is a job importer system that fetches jobs from multiple external XML feeds
 ---
 
 ## 📂 Project Structure
+    
 
-
-├── client/                 # Next.js frontend
-│   └── app/import-logs/    # Admin UI to view import logs
-│
-├── server/                 # Express backend
-│   ├── workers/            # BullMQ worker processor
-│   ├── services/           # Job fetching & queueing logic
-│   ├── models/             # Mongoose schemas
-│   ├── controllers/        # API route handlers
-│   ├── app.js              # Express config
-│   └── server.js           # Entry point
-│
-├── docker-compose.yml      # All-in-one Docker setup
-└── docs/
-    └── architecture.md      # System design & tech decisions
+        ├── client/                 # Next.js frontend
+        │   └── app/import-logs/    # Admin UI to view import logs
+        │
+        ├── server/                 # Express backend
+        │   ├── workers/            # BullMQ worker processor
+        │   ├── services/           # Job fetching & queueing logic
+        │   ├── models/             # Mongoose schemas
+        │   ├── controllers/        # API route handlers
+        │   ├── app.js              # Express config
+        │   └── server.js           # Entry point
+        │
+        ├── docker-compose.yml      # All-in-one Docker setup
+        └── docs/
+            └── architecture.md      # System design & tech decisions
 
 
 
