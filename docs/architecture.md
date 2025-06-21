@@ -44,28 +44,8 @@ Admin dashboard to view import history
         Docker + Docker Compose
 
 ## 🌐 System Architecture Diagram (Textual)
-+----------------+       +----------------+       +-------------------+
-|  External APIs |  -->  |  Fetch Service |  -->  |  BullMQ Job Queue |
-| (XML Feeds)    |       |  (cron-based)  |       |  (Redis-backed)   |
-+----------------+       +----------------+       +---------+---------+
-                                                    |
-                                                    v
-                                          +-------------------+
-                                          | Job Worker (Async)|
-                                          | - Insert/Update   |
-                                          | - Log Failures    |
-                                          +--------+----------+
-                                                   |
-                 +-------------------+              v
-                 | MongoDB (Jobs +   |<----------Import Log Service
-                 | Import Logs)      |
-                 +--------+----------+
-                          |
-                          v
-                +----------------------+
-                | Next.js Admin UI     |
-                | - View Import Logs   |
-                +----------------------+
+
+![System Architecture](./architectrure-design.png)
 
 
 ## 🔄 Data Flow Breakdown
