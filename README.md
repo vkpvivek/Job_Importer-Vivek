@@ -49,16 +49,18 @@ This is a job importer system that fetches jobs from multiple external XML feeds
 
 
 
-##  🔧 Setup Instructions
+## 🚀  How to Set Up & Run This Project Locally
     ✅ Prerequisites
         Docker & Docker Compose installed
 
 
-## 🚀 Quick Start (Docker)
+## 📥 1. Clone the Repository
+    git clone "https://github.com/vkpvivek/Job_Importer-Vivek.git"
 
+## 🐳 2. Run All Services with Docker
     # From the root directory
-
         docker compose up --build
+        
 
     # ✅ This will:
 
